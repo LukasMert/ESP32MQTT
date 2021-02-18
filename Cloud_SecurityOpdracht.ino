@@ -4,10 +4,10 @@
 #include <TaskScheduler.h>
 #include "wifi.h"
 
-const char* mqtt_server  = "10.54.32.1";
+const char* mqtt_server  = "54.229.150.108";
 const int mqtt_port  = 1883;
-#define ssid "GraduaatIOT2" 
-#define password "CloudAndSecurity101"
+#define ssid "Lukas.M" 
+#define password "1234azer"
 #define MQTT_SERIAL_PUBLISH_CH "r0795090/measurement"
 #define MQTT_SERIAL_RECEIVER_CH "r0795090/led"
 const String DEVICE_ID = "r0795090";
