@@ -4,7 +4,7 @@
 #include <TaskScheduler.h>
 #include "wifi.h"
 
-const char* mqtt_server  = "10.54.32.1";
+const char* mqtt_server  = "54.229.150.108";
 const int mqtt_port  = 1883;
 #define ssid "Lukas.M" 
 #define password "1234azer"
