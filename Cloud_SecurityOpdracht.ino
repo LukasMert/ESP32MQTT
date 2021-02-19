@@ -14,6 +14,9 @@ const String DEVICE_ID = "r0795090";
 
 const int PushButton = 15;
 
+const int sensorPin = 2;
+int sensorValue = 0;
+
 
 #define LED_PIN 5
 #define DHTPIN 4
@@ -158,7 +161,9 @@ void read_dht(){
   Serial.println(t);
   Serial.println(h);
 
- 
+  sensorValue = analogRead(sensorPin);
+  Serial.println(sensorValue);
+
   if ( Push_button_state == HIGH )
   { 
   Serial.println("De button is HIGH");
@@ -173,7 +178,7 @@ void read_dht(){
     return;
   }
   else{
-    String json = "{\"device_id\":\""+DEVICE_ID+"\",\"temperature\":\""+String(t)+"\",\"humidity\":\""+String(h)+"\", \"button\":\""+String(Push_button_state)+"\"}";
+    String json = "{\"device_id\":\""+DEVICE_ID+"\",\"temperature\":\""+String(t)+"\",\"humidity\":\""+String(h)+"\", \"button\":\""+String(Push_button_state)+"\", \"light\":\""+String(sensorValue)+"\"}";
     char jsondata[json.length()+1];
     json.toCharArray(jsondata,json.length()+1);
     publishSerialData(jsondata);
