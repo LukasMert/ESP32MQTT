@@ -12,6 +12,9 @@ const int mqtt_port  = 1883;
 #define MQTT_SERIAL_RECEIVER_CH "r0795090/led"
 const String DEVICE_ID = "r0795090";
 
+const int PushButton = 15;
+
+
 #define LED_PIN 5
 #define DHTPIN 4
 #define DHTTYPE DHT11
@@ -109,6 +112,7 @@ void setup() {
   reconnect();
 
   pinMode (LED_PIN, OUTPUT);
+  pinMode(PushButton, INPUT);
 
   dht.begin();
 
@@ -149,17 +153,30 @@ void read_dht(){
   float h = dht.readHumidity();
   float t = dht.readTemperature();
 
+  int Push_button_state = digitalRead(PushButton);
+
   Serial.println(t);
   Serial.println(h);
+
+ 
+  if ( Push_button_state == HIGH )
+  { 
+  Serial.println("De button is HIGH");
+  }
+  else 
+  {
+  Serial.println("De button is LOW");
+  }
 
   if (isnan(h) || isnan(t)) {
     Serial.println(F("Failed to read from DHT sensor!"));
     return;
   }
   else{
-    String json = "{\"device_id\":\""+DEVICE_ID+"\",\"temperature\":\""+String(t)+"\",\"humidity\":\""+String(h)+"\"}";
+    String json = "{\"device_id\":\""+DEVICE_ID+"\",\"temperature\":\""+String(t)+"\",\"humidity\":\""+String(h)+"\", \"button\":\""+String(Push_button_state)+"\"}";
     char jsondata[json.length()+1];
     json.toCharArray(jsondata,json.length()+1);
     publishSerialData(jsondata);
   }
+
 }
